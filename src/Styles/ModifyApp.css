@@ -1,0 +1,53 @@
+/* ModifyApp container */
+.modify-container {
+    width: 100%;
+    min-height: 100vh; /* Ensure full height for the page */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(to right, #5a95f5, #4a90e2);
+    padding-top: 150px; /* Top space for ProfileCard */
+    box-sizing: border-box;
+    overflow-y: auto; /* Enable scrolling if content exceeds the viewport */
+  }
+  
+  /* White background container for appointments */
+  .appointments-container {
+    width: 90%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.686);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    color: black;
+    margin-top: 40px;
+    box-sizing: border-box;
+    overflow-y: auto; /* Ensure scrolling if the container content exceeds */
+    max-height: 80vh; /* Adjust height to make room for ProfileCard and allow scrolling */
+  }
+  
+  /* Appointment card */
+  .appointment-card {
+    background: rgba(66, 153, 235, 0.2);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Appointment headings */
+  .appointment-card h3 {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  /* Appointment details text */
+  .appointment-card p {
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  

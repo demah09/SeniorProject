@@ -1,0 +1,71 @@
+/* Full page container */
+.check-in-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: linear-gradient(to right, #5a95f5, #4a90e2);
+    padding-top: 200px; /* ✅ Moves everything lower */
+}
+
+/* White Background Container (New) */
+.white-background {
+    width: 90%;
+    max-width: 900px;
+    background: rgba(245, 243, 243, 0.642); /* ✅ Subtle white background */
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+}
+
+/* Check-in info box (Blue Box) */
+.check-in-info {
+    width: 100%;
+    max-width: 800px;
+    background: rgba(89, 159, 245, 0.65); /* ✅ Stronger blue */
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(12px);
+    color: black;
+}
+
+/* Headings inside the info box */
+.check-in-info h3 {
+    margin-bottom: 8px;
+    font-weight: bold;
+    font-size: 22px; /* ✅ Bigger text */
+}
+
+/* Text inside the info box */
+.check-in-info p {
+    margin-bottom: 18px;
+    font-size: 18px;
+}
+
+/* Button Container (to keep the button inside the blue box) */
+.button-container {
+    text-align: right; /* ✅ Aligns button inside blue box */
+}
+
+/* Check-in Button */
+.check-in-button {
+    background-color: #356abf;
+    color: white;
+    padding: 14px 24px;
+    border-radius: 25px;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+/* Hover Effect */
+.check-in-button:hover {
+    background-color: #1f4d99;
+}

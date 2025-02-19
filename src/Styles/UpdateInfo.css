@@ -1,0 +1,102 @@
+/* Main Page Container */
+.update-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to right, #5a95f5, #4a90e2);
+    padding-top: 140px; /* ✅ Increased spacing to prevent overlap */
+    padding-bottom: 50px; /* ✅ Added bottom spacing to allow scrolling */
+    min-height: 100vh; /* ✅ Ensures full viewport height */
+    overflow-y: auto; /* ✅ Allows scrolling if content overflows */
+}
+
+/* Profile Card Styling */
+.profile-card-container {
+    width: 90%;
+    max-width: 900px;
+    margin-bottom: 20px; /* ✅ Pushes the form down */
+}
+
+/* Main Update Form Container */
+.update-container {
+    width: 90%;
+    max-width: 900px;
+    background: rgba(255, 255, 255, 0.3); /* ✅ Slightly more opaque for readability */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12px);
+    color: black;
+    margin-bottom: 50px; /* ✅ Ensures space at the bottom */
+}
+
+/* Form Styling */
+.update-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Form Group */
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Form Row for multiple inputs */
+.form-row {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* ✅ Ensures responsiveness */
+}
+
+.form-row .form-group {
+    flex: 1;
+    min-width: 220px; /* ✅ Prevents breaking on smaller screens */
+}
+
+/* Labels */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Read-only fields */
+input[readonly] {
+    background-color: #e0e0e0; /* ✅ Gray background for read-only fields */
+    cursor: not-allowed;
+    border: 1px solid #ccc;
+}
+
+/* Editable fields */
+input {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+    width: 100%;
+}
+
+
+/* Update Button */
+.update-button {
+    background-color: #356abf;
+    color: white;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 150px;
+    margin: 30px auto 20px; /* ✅ Increased bottom margin */
+    display: flex;
+    justify-content: center;
+    transition: background 0.3s ease-in-out;
+}
+
+.update-button:hover {
+    background-color: #1f4d99;
+}
