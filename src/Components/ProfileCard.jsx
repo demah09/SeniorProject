@@ -1,18 +1,23 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle, FaSlidersH, FaHome } from "react-icons/fa"; // ✅ Import FaHome
+import { FaUserCircle, FaSlidersH, FaHome, FaSignOutAlt } from "react-icons/fa"; //Import Icons
 
 const ProfileCard = ({ name, id, gender }) => {
-  const navigate = useNavigate(); // ✅ Hook for navigation
+  const navigate = useNavigate(); 
 
-  // ✅ Function to navigate to the Update Info page
+  //Function to navigate to the Update Info page
   const handleSettingsClick = () => {
     navigate("/update-info");
   };
 
-  // ✅ Function to navigate to Home page
+  // Function to navigate to dashboard page
   const handleHomeClick = () => {
     navigate("/dashboard");
+  };
+
+  //Function to navigate to Home.jsx (Logout)
+  const handleLogoutClick = () => {
+    navigate("/"); //  Redirect to Home page
   };
 
   const styles = {
@@ -50,7 +55,7 @@ const ProfileCard = ({ name, id, gender }) => {
     },
     buttonsContainer: {
       display: "flex",
-      gap: "15px", // ✅ Adds spacing between icons
+      gap: "15px", 
     },
     buttonStyle: {
       background: "none",
@@ -73,9 +78,9 @@ const ProfileCard = ({ name, id, gender }) => {
         </div>
       </div>
 
-      {/* ✅ Buttons Container (Home & Settings) */}
+      {/* Buttons Container (Home, Settings, Logout) */}
       <div style={styles.buttonsContainer}>
-        {/* ✅ Home Button */}
+        {/* Home Button */}
         <button
           style={styles.buttonStyle}
           onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
@@ -85,7 +90,7 @@ const ProfileCard = ({ name, id, gender }) => {
           <FaHome />
         </button>
 
-        {/* ✅ Settings Button */}
+        {/* Settings Button */}
         <button
           style={styles.buttonStyle}
           onMouseOver={(e) => (e.target.style.transform = "rotate(90deg)")}
@@ -93,6 +98,16 @@ const ProfileCard = ({ name, id, gender }) => {
           onClick={handleSettingsClick} 
         >
           <FaSlidersH />
+        </button>
+
+        {/* Logout Button */}
+        <button
+          style={styles.buttonStyle}
+          onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
+          onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
+          onClick={handleLogoutClick} 
+        >
+          <FaSignOutAlt />
         </button>
       </div>
     </div>

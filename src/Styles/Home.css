@@ -9,7 +9,7 @@ html, body, #root {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: linear-gradient(to right, #78aaff, #3b7bd5);
+  background: linear-gradient(to right, #7eaaf6, #4b8eea);
   display: flex;
   align-items: center;
   justify-content: center;
