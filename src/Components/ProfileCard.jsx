@@ -1,24 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { FaUserCircle, FaSlidersH, FaHome, FaSignOutAlt } from "react-icons/fa"; //Import Icons
+import { FaUserCircle, FaSlidersH, FaHome, FaSignOutAlt } from "react-icons/fa";
 
-const ProfileCard = ({ name, id, gender }) => {
-  const navigate = useNavigate(); 
+const ProfileCard = () => {
+  const [patient, setPatient] = useState(null); // Store patient data
+  const navigate = useNavigate();
 
-  //Function to navigate to the Update Info page
-  const handleSettingsClick = () => {
-    navigate("/update-info");
-  };
-
-  // Function to navigate to dashboard page
-  const handleHomeClick = () => {
-    navigate("/dashboard");
-  };
-
-  //Function to navigate to Home.jsx (Logout)
-  const handleLogoutClick = () => {
-    navigate("/"); //  Redirect to Home page
-  };
+  useEffect(() => {
+    // Fetch the first patient as a placeholder (We must change this when we implement the login)
+    axios.get("http://localhost:5001/patients")
+      .then((res) => {
+        if (res.data.length > 0) {
+          setPatient(res.data[0]); // Use first patient in list
+        }
+      })
+      .catch((err) => console.error("Failed to fetch patient:", err));
+  }, []);
 
   const styles = {
     profileCard: {
@@ -55,7 +53,7 @@ const ProfileCard = ({ name, id, gender }) => {
     },
     buttonsContainer: {
       display: "flex",
-      gap: "15px", 
+      gap: "15px",
     },
     buttonStyle: {
       background: "none",
@@ -67,45 +65,43 @@ const ProfileCard = ({ name, id, gender }) => {
     },
   };
 
+  if (!patient) return null; // Optional: Show loader if needed
+
   return (
     <div style={styles.profileCard}>
       <div style={styles.profileInfo}>
         <FaUserCircle style={styles.profilePic} />
         <div style={styles.profileDetails}>
-          <h2>{name}</h2> 
-          <p style={styles.profileText}>ID: {id}</p>
-          <p style={styles.profileText}>{gender}</p>
+          <h2>{patient.Patient_Name}</h2>
+          <p style={styles.profileText}>ID: {patient.FileNo}</p>
+          <p style={styles.profileText}>{patient.Gender === "M" ? "Male" : "Female"}</p>
         </div>
       </div>
 
-      {/* Buttons Container (Home, Settings, Logout) */}
       <div style={styles.buttonsContainer}>
-        {/* Home Button */}
         <button
           style={styles.buttonStyle}
           onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
           onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-          onClick={handleHomeClick} 
+          onClick={() => navigate("/dashboard")}
         >
           <FaHome />
         </button>
 
-        {/* Settings Button */}
         <button
           style={styles.buttonStyle}
           onMouseOver={(e) => (e.target.style.transform = "rotate(90deg)")}
           onMouseOut={(e) => (e.target.style.transform = "rotate(0deg)")}
-          onClick={handleSettingsClick} 
+          onClick={() => navigate("/update-info")}
         >
           <FaSlidersH />
         </button>
 
-        {/* Logout Button */}
         <button
           style={styles.buttonStyle}
           onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
           onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-          onClick={handleLogoutClick} 
+          onClick={() => navigate("/")}
         >
           <FaSignOutAlt />
         </button>
