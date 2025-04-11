@@ -31,13 +31,13 @@ const LoginOtp = () => {
 
     try {
       setError("");
-
       const response = await axios.post("http://localhost:5001/api/verify-otp", {
         email,
         otp,
       });
 
       if (response.data.verified) {
+        localStorage.setItem("userEmail", email); // ✅ Save logged-in user email
         navigate("/login/face-recognition");
       } else {
         setError("Invalid OTP. Please try again.");
@@ -62,7 +62,7 @@ const LoginOtp = () => {
   return (
     <div className="login-container">
       <div className="login-box">
-        <div className="logo-container">{/* Optional logo */}</div>
+        <div className="logo-container" />
         <h2>Enter OTP</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -74,9 +74,7 @@ const LoginOtp = () => {
             maxLength={4}
           />
           {error && <p className="error-message">{error}</p>}
-          {resendMessage && (
-            <p className="resend-message">{resendMessage}</p>
-          )}
+          {resendMessage && <p className="resend-message">{resendMessage}</p>}
           <p
             className="resend-otp"
             onClick={handleResend}
@@ -84,9 +82,7 @@ const LoginOtp = () => {
           >
             Resend OTP
           </p>
-          <button type="submit" className="next-button">
-            Next
-          </button>
+          <button type="submit" className="next-button">Next</button>
         </form>
       </div>
     </div>

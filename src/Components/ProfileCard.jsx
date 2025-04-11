@@ -4,19 +4,25 @@ import { useNavigate } from "react-router-dom";
 import { FaUserCircle, FaSlidersH, FaHome, FaSignOutAlt } from "react-icons/fa";
 
 const ProfileCard = () => {
-  const [patient, setPatient] = useState(null); // Store patient data
+  const [patient, setPatient] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Fetch the first patient as a placeholder (We must change this when we implement the login)
-    axios.get("http://localhost:5001/patients")
+    const email = localStorage.getItem("userEmail"); //Get logged-in email
+    if (!email) return;
+
+    axios
+      .get(`http://localhost:5001/api/patient/${email}`)
       .then((res) => {
-        if (res.data.length > 0) {
-          setPatient(res.data[0]); // Use first patient in list
-        }
+        setPatient(res.data);
       })
       .catch((err) => console.error("Failed to fetch patient:", err));
   }, []);
+
+  const handleLogout = () => {
+    localStorage.removeItem("userEmail"); //Clear email
+    navigate("/"); // Send to homepage 
+  };
 
   const styles = {
     profileCard: {
@@ -65,14 +71,14 @@ const ProfileCard = () => {
     },
   };
 
-  if (!patient) return null; // Optional: Show loader if needed
+  if (!patient) return null;
 
   return (
     <div style={styles.profileCard}>
       <div style={styles.profileInfo}>
         <FaUserCircle style={styles.profilePic} />
         <div style={styles.profileDetails}>
-          <h2>{patient.Patient_Name}</h2>
+          <h2>{patient.FirstName} {patient.LastName}</h2>
           <p style={styles.profileText}>ID: {patient.FileNo}</p>
           <p style={styles.profileText}>{patient.Gender === "M" ? "Male" : "Female"}</p>
         </div>
@@ -101,7 +107,7 @@ const ProfileCard = () => {
           style={styles.buttonStyle}
           onMouseOver={(e) => (e.target.style.transform = "scale(1.2)")}
           onMouseOut={(e) => (e.target.style.transform = "scale(1)")}
-          onClick={() => navigate("/")}
+          onClick={handleLogout}
         >
           <FaSignOutAlt />
         </button>
