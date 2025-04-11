@@ -84,3 +84,9 @@ html, body {
     background: #275a9e;
   }
   
+  .resend-message {
+    color: black;
+    font-size: 14px;
+    margin-top: 10px;
+  }
+  

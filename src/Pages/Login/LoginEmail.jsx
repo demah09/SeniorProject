@@ -1,41 +1,51 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "../../Styles/Login.css"; // Ensure this file contains the required styles
+import axios from "axios";
+import "../../Styles/Login.css";
 
 const LoginEmail = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleChange = (e) => {
     setEmail(e.target.value);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    
+  const handleNext = async () => {
     if (!email) {
       setError("Email is required");
       return;
     }
 
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    if (!validateEmail(email)) {
       setError("Invalid email format");
       return;
     }
-    
-    setError("");
-    navigate("/login/otp", { state: { email } });
+
+    try {
+      setError("");
+      await axios.post("http://localhost:5001/api/send-otp", { email });
+      navigate("/login/otp", { state: { email } });
+    } catch (err) {
+      if (err.response?.status === 404) {
+        setError("This email is not registered in the system.");
+      } else {
+        setError("Failed to send OTP. Please try again.");
+      }
+    }
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <div className="logo-container">
-          
-        </div>
+        <div className="logo-container" />
         <h2>Enter Your Registered Email</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="email"
             placeholder="abc@example.com"
@@ -44,21 +54,10 @@ const LoginEmail = () => {
             className="email-input"
           />
           {error && <p className="error-message">{error}</p>}
-          <button 
-            type="button" 
-            className="next-button" 
-            onClick={() => {
-              if (!email) {
-                setError("Email is required");
-                return;
-              }
-              if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                setError("Invalid email format");
-                return;
-              }
-              setError("");
-              navigate("/login/otp", { state: { email } });
-            }}
+          <button
+            type="button"
+            className="next-button"
+            onClick={handleNext}
           >
             Next
           </button>

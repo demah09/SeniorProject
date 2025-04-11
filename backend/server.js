@@ -1,27 +1,20 @@
 //Imports
 const express = require("express");
-const mysql = require("mysql2");
 const cors = require("cors");
+const db = require("./db");
+const otpRoutes = require("./otp");
 require("dotenv").config();
+
+
+
 
 //Creating an express instance
 const app = express();
 app.use(cors()); //front end can access back end
 app.use(express.json());
 
-// Connect to MySQL Database
-const db = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "DeemahRoot09!", 
-  database: "SPDB",
-  port: 3306, 
-});
 
-db.connect((err) => {
-  if (err) throw err;
-  console.log("Connected to MySQL Database ✅");
-});
+app.use("/api", otpRoutes); // Enables /api/send-otp and /api/verify-otp
 
 // API Route to Fetch Users from Database
 app.get("/patients", (req, res) => {
@@ -35,3 +28,5 @@ app.get("/patients", (req, res) => {
 app.listen(5001, () => {
   console.log("Backend running on http://localhost:5001");
 });
+
+

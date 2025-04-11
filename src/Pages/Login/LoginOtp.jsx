@@ -1,40 +1,68 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "../../Styles/Login.css"; // Ensure this file contains the required styles
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import "../../Styles/Login.css";
 
 const LoginOtp = () => {
   const [otp, setOtp] = useState("");
   const [error, setError] = useState("");
+  const [resendMessage, setResendMessage] = useState("");
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const email = location.state?.email;
 
   const handleChange = (e) => {
     setOtp(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!otp) {
       setError("OTP is required");
       return;
     }
 
-    if (!/^[0-9]{4,6}$/.test(otp)) {
-      setError("Invalid OTP format");
+    if (!/^[0-9]{4}$/.test(otp)) {
+      setError("OTP must be a 4-digit number");
       return;
     }
-    
-    setError("");
-    navigate("/login/face-recognition");
 
+    try {
+      setError("");
+
+      const response = await axios.post("http://localhost:5001/api/verify-otp", {
+        email,
+        otp,
+      });
+
+      if (response.data.verified) {
+        navigate("/login/face-recognition");
+      } else {
+        setError("Invalid OTP. Please try again.");
+      }
+    } catch (err) {
+      console.error("OTP verification error:", err);
+      setError("Error verifying OTP. Please try again.");
+    }
+  };
+
+  const handleResend = async () => {
+    setResendMessage("");
+    try {
+      await axios.post("http://localhost:5001/api/send-otp", { email });
+      setResendMessage("OTP resent successfully!");
+    } catch (err) {
+      console.error("Resend OTP failed:", err);
+      setResendMessage("Failed to resend OTP. Please try again.");
+    }
   };
 
   return (
     <div className="login-container">
       <div className="login-box">
-        <div className="logo-container">
-          
-        </div>
+        <div className="logo-container">{/* Optional logo */}</div>
         <h2>Enter OTP</h2>
         <form onSubmit={handleSubmit}>
           <input
@@ -43,11 +71,22 @@ const LoginOtp = () => {
             value={otp}
             onChange={handleChange}
             className="otp-input"
-            maxLength={6}
+            maxLength={4}
           />
           {error && <p className="error-message">{error}</p>}
-          <p className="resend-otp">Resend OTP</p>
-          <button type="submit" className="next-button">Next</button>
+          {resendMessage && (
+            <p className="resend-message">{resendMessage}</p>
+          )}
+          <p
+            className="resend-otp"
+            onClick={handleResend}
+            style={{ cursor: "pointer", color: "#007bff" }}
+          >
+            Resend OTP
+          </p>
+          <button type="submit" className="next-button">
+            Next
+          </button>
         </form>
       </div>
     </div>
