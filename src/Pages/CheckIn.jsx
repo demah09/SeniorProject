@@ -16,14 +16,14 @@ const CheckIn = ({ lang, onLanguageChange }) => {
     if (!fileNo) return;
 
     axios
-      .get(`http://localhost:5001/api/appointments/${fileNo}`)
+      .get(`https://seniorproject-uq3g.onrender.com/api/appointments/${fileNo}`)
       .then((res) => setAppointments(res.data))
       .catch((err) => console.error("Error fetching appointments:", err));
   }, []);
 
   const handleCheckIn = (apptId) => {
     axios
-      .put(`http://localhost:5001/api/appointment/${apptId}`, {
+      .put(`https://seniorproject-uq3g.onrender.com/api/appointment/${apptId}`, {
         status: "Checked In",
       })
       .then(() => {

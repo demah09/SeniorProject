@@ -14,7 +14,7 @@ const ProfileCard = ({ lang, onLanguageChange }) => {
     if (!email) return;
 
     axios
-      .get(`http://localhost:5001/api/patient/${email}`)
+      .get(`https://seniorproject-uq3g.onrender.com/api/patient/${email}`)
       .then((res) => {
         setPatient(res.data);
         localStorage.setItem("FileNo", res.data.FileNo);

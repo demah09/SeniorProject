@@ -98,7 +98,7 @@ const Register = ({ lang, onLanguageChange }) => {
     }
 
     try {
-      await axios.post("http://localhost:5001/api/register", {
+      await axios.post("https://seniorproject-uq3g.onrender.com/api/register", {
         ...formData,
         faceDescriptor,
       });

@@ -35,7 +35,7 @@ const LoginOtp = ({ lang }) => {
 
     try {
       setError("");
-      const response = await axios.post("http://localhost:5001/api/verify-otp", {
+      const response = await axios.post("https://seniorproject-uq3g.onrender.com/api/verify-otp", {
         email,
         otp,
       });
@@ -55,7 +55,7 @@ const LoginOtp = ({ lang }) => {
   const handleResend = async () => {
     setResendMessage("");
     try {
-      await axios.post("http://localhost:5001/api/send-otp", { email });
+      await axios.post("https://seniorproject-uq3g.onrender.com/api/send-otp", { email });
       setResendMessage(t.otpResent);
     } catch (err) {
       console.error("Resend OTP failed:", err);

@@ -4,7 +4,7 @@ import "../Styles/SuccessMessage.css";
 import { FaCheckCircle } from "react-icons/fa";
 
 const SuccessMessage = () => {
-  const location = useLocation(); // ✅ Get location from useLocation hook
+  const location = useLocation(); //Get location from useLocation hook
   const navigate = useNavigate();
 
   // If state is not available, default message

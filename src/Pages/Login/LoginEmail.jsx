@@ -36,7 +36,7 @@ const LoginEmail = ({ lang }) => {
 
     try {
       setError("");
-      await axios.post("http://localhost:5001/api/send-otp", { email });
+      await axios.post("https://seniorproject-uq3g.onrender.com/api/send-otp", { email });
       navigate("/login/otp", { state: { email } });
     } catch (err) {
       if (err.response?.status === 404) {

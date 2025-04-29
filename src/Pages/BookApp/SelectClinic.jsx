@@ -16,7 +16,7 @@ const SelectClinic = ({ lang, onLanguageChange }) => {
 
 
   useEffect(() => {
-    axios.get("http://localhost:5001/api/clinics")
+    axios.get("https://seniorproject-uq3g.onrender.com/api/clinics")
       .then((res) => setClinics(res.data))
       .catch((err) => console.error("Error loading clinics:", err));
   }, []);

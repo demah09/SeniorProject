@@ -28,7 +28,7 @@ const UpdateInfo = ({ lang, onLanguageChange }) => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/patient/${loggedInEmail}`);
+        const response = await axios.get(`https://seniorproject-uq3g.onrender.com/api/patient/${loggedInEmail}`);
         const data = response.data;
         setFormData({
           fileNo: data.FileNo,
@@ -57,7 +57,7 @@ const UpdateInfo = ({ lang, onLanguageChange }) => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:5001/api/patient/${loggedInEmail}`, {
+      await axios.put(`https://seniorproject-uq3g.onrender.com/api/patient/${loggedInEmail}`, {
         email: formData.email,
         phone: formData.phone,
         emergency_contact: formData.emergencyContact,

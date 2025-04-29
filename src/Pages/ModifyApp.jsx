@@ -15,7 +15,7 @@ const ModifyApp = ({ lang, onLanguageChange }) => {
     if (!fileNo) return;
 
     axios
-      .get(`http://localhost:5001/api/appointments/${fileNo}`)
+      .get(`https://seniorproject-uq3g.onrender.com/api/appointments/${fileNo}`)
       .then((res) => setAppointments(res.data))
       .catch((err) => console.error("Failed to fetch appointments:", err));
   }, [fileNo]);

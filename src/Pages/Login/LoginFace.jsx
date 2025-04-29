@@ -47,14 +47,14 @@ const LoginFace = () => {
           if (detections.length > 0) {
             const descriptor = Array.from(detections[0].descriptor);
             try {
-              const response = await axios.post("http://localhost:5001/api/facial-login", { descriptor });
+              const response = await axios.post("https://seniorproject-uq3g.onrender.com/api/facial-login", { descriptor });
 
               if (response.status === 200 && response.data && response.data.Email) {
                 localStorage.setItem("Email", response.data.Email);
                 localStorage.setItem("FirstName", response.data.FirstName || "");
 
                 setMessage("Face recognized! Redirecting to Email...");
-                clearInterval(interval); // ✅ Stop scanning immediately
+                clearInterval(interval); //Stop scanning immediately
 
                 setTimeout(() => {
                   navigate("/login/email");
@@ -67,7 +67,7 @@ const LoginFace = () => {
           }
         }, 1500);
 
-        // ✅ Clean up interval properly when component unmounts
+        //Clean up interval properly when component unmounts
         return () => clearInterval(interval);
       });
     };

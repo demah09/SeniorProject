@@ -30,7 +30,7 @@ const ModifyApp2 = ({ lang, onLanguageChange }) => {
     if (!appointmentId) return;
 
     axios
-      .get(`http://localhost:5001/api/appointment/${appointmentId}`)
+      .get(`https://seniorproject-uq3g.onrender.com/api/appointment/${appointmentId}`)
       .then((res) => {
         const data = res.data;
         const datetimeLocal = toLocalDatetimeInputString(data.DOA);
@@ -47,7 +47,7 @@ const ModifyApp2 = ({ lang, onLanguageChange }) => {
 
   const handleConfirm = async () => {
     try {
-      await axios.put(`http://localhost:5001/api/appointment/${appointmentId}`, {
+      await axios.put(`https://seniorproject-uq3g.onrender.com/api/appointment/${appointmentId}`, {
         datetime: appointment,
       });
 
@@ -62,7 +62,7 @@ const ModifyApp2 = ({ lang, onLanguageChange }) => {
 
   const handleCancel = async () => {
     try {
-      await axios.delete(`http://localhost:5001/api/appointment/${appointmentId}`);
+      await axios.delete(`https://seniorproject-uq3g.onrender.com/api/appointment/${appointmentId}`);
       navigate("/success", {
         state: { message: "Appointment Canceled Successfully" },
       });

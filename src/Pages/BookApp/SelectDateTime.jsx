@@ -32,7 +32,7 @@ const SelectDateTime = ({ lang, onLanguageChange }) => {
       const dateStr = selectedDate.toISOString().split("T")[0];
 
       try {
-        const res = await axios.get("http://localhost:5001/api/booked-timeslots", {
+        const res = await axios.get("https://seniorproject-uq3g.onrender.com/api/booked-timeslots", {
           params: { doctor: Doc_ID, date: dateStr }
         });
         setBookedSlots(res.data);
@@ -59,7 +59,7 @@ const SelectDateTime = ({ lang, onLanguageChange }) => {
     const datetime = `${dateString} ${selectedTime}`;
 
     try {
-      await axios.post("http://localhost:5001/api/appointments", {
+      await axios.post("https://seniorproject-uq3g.onrender.com/api/appointments", {
         FileNo,
         Doc_ID,
         Clinic_ID,
