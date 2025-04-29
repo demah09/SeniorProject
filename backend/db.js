@@ -8,8 +8,8 @@ const db = mysql.createPool({
   host: "checkmate-spdb.l.aivencloud.com",
   user: "avnadmin",
   password: process.env.DB_PASSWORD, 
-  database: "defaultdb",
-  port: 25060,
+  database: "SPDBavien",
+  port: 24673,
   ssl: {
     ca: fs.readFileSync('./backend/certs/ca.pem')
   }
