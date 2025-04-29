@@ -14,23 +14,37 @@ function euclideanDistance(desc1, desc2) {
 router.post("/facial-login", async (req, res) => {
   const { descriptor } = req.body;
 
+  console.log("Descriptor received:", descriptor);
+
   if (!descriptor) {
     return res.status(400).json({ message: "Descriptor is required" });
   }
 
   try {
-    const [patients] = await db.query("SELECT Email, FacialId, FirstName FROM Patient WHERE FacialId IS NOT NULL");
+    const [patients] = await db.query(
+      "SELECT Email, FacialId, FirstName FROM Patient WHERE FacialId IS NOT NULL"
+    );
 
     for (const patient of patients) {
-      const savedDescriptor = JSON.parse(patient.FacialId);
+      let savedDescriptor;
+      try {
+        savedDescriptor = JSON.parse(patient.FacialId);
+      } catch (err) {
+        console.warn(`Skipping invalid FacialId for ${patient.Email}`);
+        continue; // Skip this record if it's not valid JSON
+      }
+
       const distance = euclideanDistance(descriptor, savedDescriptor);
 
-      if (distance < 0.45) { 
-        return res.status(200).json({ Email: patient.Email, FirstName: patient.FirstName });
+      if (distance < 0.45) {
+        return res.status(200).json({
+          Email: patient.Email,
+          FirstName: patient.FirstName,
+        });
       }
     }
 
-    // ❌ No match found
+    // No matching face found
     res.status(404).json({ message: "Face not recognized" });
   } catch (error) {
     console.error("Facial login error:", error);
