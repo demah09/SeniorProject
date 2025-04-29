@@ -24,7 +24,14 @@ const facialLoginRoute = require("./backend/routes/facialLogin");
 
 //Creating an express instance
 const app = express();
-app.use(cors()); //front end can access back end
+
+
+//front end can access back end
+app.use(cors({
+  origin: "https://hospitalcheckin.netlify.app", //frontend domain
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use("/api", registerRoutes);

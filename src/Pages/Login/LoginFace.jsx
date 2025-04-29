@@ -24,14 +24,14 @@ const LoginFace = () => {
       video.srcObject = stream;
       video.play();
 
-      // ✅ Only start scanning when video is playing
+      // Only start scanning when video is playing
       video.addEventListener('playing', async () => {
         const canvas = document.getElementById('overlay');
         const displaySize = { width: video.videoWidth, height: video.videoHeight };
         faceapi.matchDimensions(canvas, displaySize);
 
         const interval = setInterval(async () => {
-          // ✅ Check if still inside /login/face-recognition before scanning
+          // Check if still inside /login/face-recognition before scanning
           if (!window.location.pathname.includes("/login/face-recognition")) {
             clearInterval(interval); // Stop scanning if user navigated away
             return;
