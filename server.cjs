@@ -28,7 +28,7 @@ const app = express();
 
 //front end can access back end
 app.use(cors({
-  origin: "https://hospitalcheckin.netlify.app", //frontend domain
+  origin: "https://checkmate-pmu.netlify.app", //frontend domain
   credentials: true
 }));
 
