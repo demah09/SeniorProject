@@ -11,7 +11,7 @@ const db = mysql.createPool({
   database: "defaultdb",
   port: 25060,
   ssl: {
-    ca: fs.readFileSync("./certs/ca.pem") 
+    ca: fs.readFileSync('./backend/certs/ca.pem')
   }
 });
 
