@@ -1,27 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import "../../Styles/Login.css";
+import "../../Styles/LoginEmail.css";
+import HelpButton from "../../Components/HelpButton";
+import translations from "../../i18n/translations";
 
-const LoginEmail = () => {
+const LoginEmail = ({ lang }) => {
   const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
   const [error, setError] = useState("");
+
   const navigate = useNavigate();
+  const t = translations[lang] || translations.en;
 
-  const validateEmail = (email) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  useEffect(() => {
+    const recognizedEmail = localStorage.getItem("Email");
+    const recognizedFirstName = localStorage.getItem("FirstName");
+    if (recognizedEmail) setEmail(recognizedEmail);
+    if (recognizedFirstName) setFirstName(recognizedFirstName);
+  }, []);
 
-  const handleChange = (e) => {
-    setEmail(e.target.value);
-  };
+  const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+  const handleChange = (e) => setEmail(e.target.value);
 
   const handleNext = async () => {
     if (!email) {
       setError("Email is required");
       return;
     }
-
     if (!validateEmail(email)) {
       setError("Invalid email format");
       return;
@@ -42,10 +49,13 @@ const LoginEmail = () => {
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <div className="logo-container" />
-        <h2>Enter Your Registered Email</h2>
-        <form onSubmit={(e) => e.preventDefault()}>
+      <HelpButton lang={lang} />
+      <div className="login-card">
+        {firstName && (
+          <h3 className="login-greeting">{t.hello || "Hello"} {firstName}</h3>
+        )}
+        <h2 className="login-title">{t.enterEmail}</h2>
+        <form onSubmit={(e) => e.preventDefault()} className="login-form">
           <input
             type="email"
             placeholder="abc@example.com"
@@ -54,12 +64,8 @@ const LoginEmail = () => {
             className="email-input"
           />
           {error && <p className="error-message">{error}</p>}
-          <button
-            type="button"
-            className="next-button"
-            onClick={handleNext}
-          >
-            Next
+          <button type="button" className="next-button" onClick={handleNext}>
+            {t.next}
           </button>
         </form>
       </div>

@@ -1,28 +1,48 @@
 import React from "react";
 import { FaChevronRight } from "react-icons/fa";
-import ProfileCard from "../Components/ProfileCard"; // Import ProfileCard
-import "../Styles/Dashboard.css"; // Import CSS file
+import ProfileCard from "../Components/ProfileCard";
+import "../Styles/Dashboard.css";
 import { useNavigate } from "react-router-dom";
-const Dashboard = () => {
-  const navigate = useNavigate();
-  return (
-    <div className="dashboard-container">
-      {/* Full-width Profile Section */}
-      <ProfileCard name="Demah Raid" id="12987652" gender="Female" />
+import HelpButton from "../Components/HelpButton";
+import translations from "../i18n/translations";
 
-      {/* Centered Action Buttons */}
-      <div className="actions-section">
-        <button className="action-button">
-          Book Appointment <FaChevronRight className="icon" />
-        </button>
-        <button className="action-button" onClick={ () => navigate("/modify-app")}>
-          Modify Appointment <FaChevronRight className="icon" />
-        </button>
-        <button className="action-button" onClick={ () => navigate("/check-in")}>
-          Check-in to Appointment <FaChevronRight className="icon" />
-        </button>
+const Dashboard = ({ lang, onLanguageChange }) => {
+  const navigate = useNavigate();
+
+  return (
+    <>
+      {/* Full-width ProfileCard outside of dashboard-container */}
+      <ProfileCard
+        lang={lang}
+        onLanguageChange={onLanguageChange}
+      />
+
+      <div className="dashboard-container">
+      <HelpButton lang={lang} />
+
+        {/* Centered Action Buttons */}
+        <div className="actions-section">
+          <button
+            className="action-button"
+            onClick={() => navigate("/select-clinic")}
+          >
+            {translations[lang].bookAppointment}  <FaChevronRight className="icon" />
+          </button>
+          <button
+            className="action-button"
+            onClick={() => navigate("/modify-app")}
+          >
+            {translations[lang].modifyAppointment} <FaChevronRight className="icon" />
+          </button>
+          <button
+            className="action-button"
+            onClick={() => navigate("/check-in")}
+          >
+            {translations[lang].checkinAppointment} <FaChevronRight className="icon" />
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

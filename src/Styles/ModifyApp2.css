@@ -1,90 +1,128 @@
 /* Main container */
 .container {
-    width: 85%; /* ✅ Increased width to make it more rectangular */
-    max-width: 1000px; /* ✅ Increased max-width for better proportions */
-    margin: auto;
-    font-family: Arial, sans-serif;
-    background-color: #f8f9fab5;
-    padding: 40px 60px; /* ✅ Increased horizontal padding */
-    border-radius: 15px; /* ✅ Slightly rounded corners, but more rectangular */
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
-    color: black;
+  width: 100%;
+  max-width: 1000px;
+  margin: auto;
+  margin-top: 160px;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fab5;
+  padding: 40px 60px;
+  border-radius: 15px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+  color: black;
+  box-sizing: border-box;
 }
-  
-  /* Profile Card Section */
-  .profile-card {
-    width: 90%; /* ✅ Increased width for a rectangular look */
-    max-width: 1000px; /* ✅ Prevents it from getting too large */
-    background: rgba(255, 255, 255, 0.2);
-    padding: 20px 40px; /* ✅ Increased horizontal padding */
-    border-radius: 15px; /* ✅ Reduced for a subtle curve */
-    display: flex;
-    align-items: center;
-    justify-content: space-between; /* ✅ Spreads content evenly */
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* ✅ Soft shadow for depth */
+
+/* Appointment Modification Card */
+.appointment-card {
+  background: rgba(89, 159, 245, 0.65);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: black;
 }
-  
-  /* Appointment Modification Section */
-  .appointment-card {
-    background: rgba(89, 159, 245, 0.65);
-    padding: 20px;
-    border-radius: 10px;
-    margin-top: 20px;
-    color: black;
+
+h3 {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* Input Field Styling */
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  background-color: #f8f9fa;
+  color: black;
+}
+
+/* Button Group: Aligns buttons to left and right */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+/* Shared Button Styling */
+.confirm-btn,
+.cancel-btn {
+  padding: 12px 25px;
+  font-size: 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 140px;
+  max-width: 180px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Confirm Button */
+.confirm-btn {
+  background-color: #356abf;
+  color: white;
+}
+.confirm-btn:hover {
+  background-color: #1f4d99;
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Cancel Button */
+.cancel-btn {
+  background-color: #e74c3c;
+  color: white;
+}
+.cancel-btn:hover {
+  background-color: #c0392b;
+  transform: scale(1.03);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 25px;
+    margin-top: 140px;
   }
-  
-  h3 {
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  
-  /* Input Field Styling */
+
   input {
-    width: 100%;
-    padding: 12px;
-    margin: 10px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-size: 16px;
-    background-color: #f8f9fa;
-    color: black;
+    font-size: 15px;
   }
-  
-  /* Button Group */
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-  
-  /* Confirm Button */
-  .confirm-btn {
-    background-color: #356abf;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease-in-out;
-  }
-  
-  .confirm-btn:hover {
-    background-color: #1f4d99;
-  }
-  
-  /* Cancel Button */
+
+  .confirm-btn,
   .cancel-btn {
-    background-color: #e74c3c;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 25px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background 0.3s ease-in-out;
+    font-size: 15px;
+    padding: 10px 18px;
   }
-  
-  .cancel-btn:hover {
-    background-color: #c0392b;
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 25px 20px;
+    margin-top: 120px;
   }
+
+  .appointment-card {
+    padding: 16px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  .button-group {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .confirm-btn,
+  .cancel-btn {
+    width: 45%;
+  }
+}

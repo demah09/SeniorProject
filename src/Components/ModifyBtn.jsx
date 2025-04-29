@@ -1,8 +1,11 @@
 import React from "react";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import translations from "../i18n/translations";
 
-const ModifyBtn = () => {
+
+const ModifyBtn = ({ appointmentId , lang, onLanguageChange }) => {
   const navigate = useNavigate();
+  const t = translations[lang] || translations.en;
 
   const styles = {
     modifyButton: {
@@ -18,7 +21,9 @@ const ModifyBtn = () => {
   };
 
   const handleClick = () => {
-    navigate("/modify-details");
+    navigate("/modify-details", {
+      state: { appointmentId }, //pass ID 
+    });
   };
 
   return (
@@ -29,7 +34,7 @@ const ModifyBtn = () => {
         onMouseOut={(e) => (e.target.style.backgroundColor = "#356abf")}
         onClick={handleClick}
       >
-        Modify
+        {t.modify}
       </button>
     </div>
   );

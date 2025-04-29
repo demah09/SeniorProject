@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
-import "../../Styles/Login.css";
+import "../../Styles/LoginOtp.css";
+import HelpButton from "../../Components/HelpButton";
+import translations from "../../i18n/translations";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
-const LoginOtp = () => {
+const LoginOtp = ({ lang }) => {
   const [otp, setOtp] = useState("");
+  const [showOtp, setShowOtp] = useState(false);
   const [error, setError] = useState("");
   const [resendMessage, setResendMessage] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-
+  const t = translations[lang] || translations.en;
   const email = location.state?.email;
 
   const handleChange = (e) => {
@@ -20,12 +24,12 @@ const LoginOtp = () => {
     e.preventDefault();
 
     if (!otp) {
-      setError("OTP is required");
+      setError(t.otpRequired);
       return;
     }
 
     if (!/^[0-9]{4}$/.test(otp)) {
-      setError("OTP must be a 4-digit number");
+      setError(t.otpInvalid);
       return;
     }
 
@@ -37,14 +41,14 @@ const LoginOtp = () => {
       });
 
       if (response.data.verified) {
-        localStorage.setItem("userEmail", email); // ✅ Save logged-in user email
-        navigate("/login/face-recognition");
+        localStorage.setItem("userEmail", email);
+        navigate("/dashboard");
       } else {
-        setError("Invalid OTP. Please try again.");
+        setError(t.otpIncorrect);
       }
     } catch (err) {
       console.error("OTP verification error:", err);
-      setError("Error verifying OTP. Please try again.");
+      setError(t.otpServerError);
     }
   };
 
@@ -52,40 +56,53 @@ const LoginOtp = () => {
     setResendMessage("");
     try {
       await axios.post("http://localhost:5001/api/send-otp", { email });
-      setResendMessage("OTP resent successfully!");
+      setResendMessage(t.otpResent);
     } catch (err) {
       console.error("Resend OTP failed:", err);
-      setResendMessage("Failed to resend OTP. Please try again.");
+      setResendMessage(t.otpResendFail);
     }
+  };
+
+  const toggleShowOtp = () => {
+    setShowOtp((prev) => !prev);
   };
 
   return (
     <div className="login-container">
-      <div className="login-box">
-        <div className="logo-container" />
-        <h2>Enter OTP</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="password"
-            placeholder="****"
-            value={otp}
-            onChange={handleChange}
-            className="otp-input"
-            maxLength={4}
-          />
-          {error && <p className="error-message">{error}</p>}
-          {resendMessage && <p className="resend-message">{resendMessage}</p>}
-          <p
-            className="resend-otp"
-            onClick={handleResend}
-            style={{ cursor: "pointer", color: "#007bff" }}
-          >
-            Resend OTP
-          </p>
-          <button type="submit" className="next-button">Next</button>
-        </form>
-      </div>
-    </div>
+  <HelpButton lang={lang} />
+  <div className="login-box">
+    <h2>{t.enterOtp}</h2>
+    <form onSubmit={handleSubmit} className="otp-form">
+      <input
+        type={showOtp ? "text" : "password"}
+        placeholder="****"
+        value={otp}
+        onChange={handleChange}
+        className="otp-input"
+        maxLength={4}
+      />
+      <button
+        type="button"
+        className="otp-toggle"
+        onClick={toggleShowOtp}
+        aria-label="Toggle OTP visibility"
+      >
+        {showOtp ? <FaEyeSlash /> : <FaEye />}
+      </button>
+
+      {error && <p className="error-message">{error}</p>}
+      {resendMessage && <p className="resend-message">{resendMessage}</p>}
+      
+      <p className="resend-otp" onClick={handleResend}>
+        {t.resend}
+      </p>
+      <button type="submit" className="next-button">
+        {t.next}
+      </button>
+    </form>
+  </div>
+</div>
+
   );
 };
 

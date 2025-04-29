@@ -1,0 +1,133 @@
+/* Page background and layout */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(to right, #C2E7FF, #6EA8FE);
+}
+
+/* Main white card */
+.login-box {
+  background: #ffffffcb;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.12);
+  text-align: center;
+  width: 100%;
+  max-width: 450px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px; 
+}
+form {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Heading */
+h2 {
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+  color: #333;
+}
+
+/* OTP Input */
+.otp-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.otp-input {
+  width: 100%;
+  padding: 12px 40px 12px 12px; /* Space for the icon */
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 30px;
+  text-align: center;
+  background: #fff;
+  color: #333;
+  position: relative;
+}
+
+.otp-toggle {
+  margin-top: -38px;
+  margin-left: calc(100% - 40px);
+  background: none;
+  border: none;
+  color: #4b8eea;
+  font-size: 1.1rem;
+  cursor: pointer;
+  position: absolute;
+}
+.otp-form {
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0;
+}
+
+
+/* Resend OTP link */
+.resend-otp {
+  color: #3B82F6;
+  cursor: pointer;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.resend-otp:hover {
+  text-decoration: underline;
+}
+
+/* OTP resend status */
+.resend-message {
+  font-size: 14px;
+  color: black;
+  margin-top: 5px;
+}
+
+/* Button */
+.next-button {
+  width: 100%;
+  max-width: 200px;
+  padding: 10px;
+  background: #316cb5;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.next-button:hover {
+  background: #275a9e;
+}
+
+/* Error messages */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 8px;
+}
+
+/* Hide unused logo container */
+.logo-container {
+  display: none;
+}

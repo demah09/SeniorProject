@@ -1,13 +1,14 @@
 // Database connection
 
-const mysql = require("mysql2/promise"); // Use the promise version
+const mysql = require("mysql2/promise");
 
 const db = mysql.createPool({
-  host: "localhost",
-  user: "root",
-  password: "DeemahRoot09!",
-  database: "SPDB",
-  port: 3306,
+  host: "checkmate-spdb.l.aivencloud.com",  user: "avnadmin",
+  password: "AVNS_o1GhUbRe6GHgkyTGG9O",
+  database: "defaultdb",
+  port: 25060, // Default Aiven MySQL port
+  ssl: {
+    ca: fs.readFileSync("./certs/ca.pem")  }
 });
 
 module.exports = db;

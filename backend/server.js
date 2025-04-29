@@ -13,6 +13,11 @@ require("dotenv").config();
 const otpRoutes = require("./routes/otp");
 const registerRoutes = require("./routes/register");
 const patientRoutes = require("./routes/patients");
+const clinicRoutes = require("./routes/clinics");
+const doctorRoutes = require("./routes/doctors");
+const appointmentRoutes = require("./routes/appointment");
+const facialLoginRoute = require("./routes/facialLogin");
+
 
 
 
@@ -25,6 +30,11 @@ app.use(express.json());
 app.use("/api", registerRoutes);
 app.use("/api", otpRoutes); // Enables /api/send-otp and /api/verify-otp
 app.use("/api", patientRoutes);
+app.use("/api", clinicRoutes);
+app.use("/api", doctorRoutes);
+app.use("/api", appointmentRoutes);
+app.use("/api", facialLoginRoute);
+
 
 // Start the Backend Server
 app.listen(5001, () => {

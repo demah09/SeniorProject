@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const db = require("../db"); // relative path to db.js
+const db = require("../db");
 
 // Register a new patient
 router.post("/register", async (req, res) => {
@@ -14,13 +14,14 @@ router.post("/register", async (req, res) => {
     Email,
     Emergency_Contact,
     Gender,
+    faceDescriptor, // Capture the face descriptor from request
   } = req.body;
 
   try {
     await db.query(
       `INSERT INTO Patient 
-        (ID_Iqama, FirstName, SecondName, LastName, DOB, Phone_No, Email, Emergency_Contact, Gender, Status) 
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+        (ID_Iqama, FirstName, SecondName, LastName, DOB, Phone_No, Email, Emergency_Contact, Gender, Status, FacialId) 
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
       [
         ID_Iqama,
         FirstName,
@@ -31,7 +32,8 @@ router.post("/register", async (req, res) => {
         Email,
         Emergency_Contact,
         Gender,
-        "Active", // default value
+        "Active", // default status
+        faceDescriptor ? JSON.stringify(faceDescriptor) : null, // Save descriptor as JSON string or null
       ]
     );
 
