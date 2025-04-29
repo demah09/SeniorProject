@@ -1,7 +1,7 @@
 //Imports
 const express = require("express");
 const cors = require("cors");
-const db = require("./db");
+const db = require("./backend/db");
 require("dotenv").config();
 
 
@@ -10,13 +10,13 @@ require("dotenv").config();
 
 
 //Routes
-const otpRoutes = require("./routes/otp");
-const registerRoutes = require("./routes/register");
-const patientRoutes = require("./routes/patients");
-const clinicRoutes = require("./routes/clinics");
-const doctorRoutes = require("./routes/doctors");
-const appointmentRoutes = require("./routes/appointment");
-const facialLoginRoute = require("./routes/facialLogin");
+const otpRoutes = require("./backend/routes/otp");
+const registerRoutes = require("./backend/routes/register");
+const patientRoutes = require("./backend/routes/patients");
+const clinicRoutes = require("./backend/routes/clinics");
+const doctorRoutes = require("./backend/routes/doctors");
+const appointmentRoutes = require("./backend/routes/appointment");
+const facialLoginRoute = require("./backend/routes/facialLogin");
 
 
 
@@ -35,10 +35,18 @@ app.use("/api", doctorRoutes);
 app.use("/api", appointmentRoutes);
 app.use("/api", facialLoginRoute);
 
+app.get("/", (req, res) => {
+  res.send("Checkmate backend is running");
+});
+
+
 
 // Start the Backend Server
-app.listen(5001, () => {
-  console.log("Backend running on http://localhost:5001");
+const PORT = process.env.PORT || 5001;
+
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
 });
+
 
 
