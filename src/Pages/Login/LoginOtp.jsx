@@ -81,14 +81,19 @@ const LoginOtp = ({ lang }) => {
         className="otp-input"
         maxLength={4}
       />
-      <button
-        type="button"
-        className="otp-toggle"
-        onClick={toggleShowOtp}
-        aria-label="Toggle OTP visibility"
-      >
-        {showOtp ? <FaEyeSlash /> : <FaEye />}
-      </button>
+      <div className="otp-input-wrapper">
+         <input
+            type={showOtp ? "text" : "password"}
+            placeholder="****"
+            value={otp}
+            onChange={handleChange}
+            className="otp-input"
+            maxLength={4}
+        />
+          <span className="otp-toggle" onClick={toggleShowOtp}>
+              {showOtp ? <FaEyeSlash /> : <FaEye />}
+          </span>
+          </div>
 
       {error && <p className="error-message">{error}</p>}
       {resendMessage && <p className="resend-message">{resendMessage}</p>}
