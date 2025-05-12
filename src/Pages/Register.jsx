@@ -97,6 +97,12 @@ const Register = ({ lang, onLanguageChange }) => {
       return;
     }
 
+    const validationError = validateForm();
+    if (validationError) {
+      setError(validationError);
+      return;
+    }
+
     try {
       await axios.post("https://seniorproject-uq3g.onrender.com/api/register", {
         ...formData,
@@ -118,6 +124,29 @@ const Register = ({ lang, onLanguageChange }) => {
       setError(t.failMsg);
     }
   };
+
+  const validateForm = () => {
+    const { ID_Iqama, FirstName, LastName, DOB, Email, Phone_No, Emergency_Contact } = formData;
+  
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phoneRegex = /^[0-9]{9,15}$/;
+    const nameRegex = /^[A-Za-z]+$/;
+    const idRegex = /^[0-9]{10}$/;
+  
+    if (!idRegex.test(ID_Iqama)) return "ID/Iqama must be a 10-digit number.";
+    if (!nameRegex.test(FirstName)) return "First name must contain only letters.";
+    if (LastName && !nameRegex.test(LastName)) return "Last name must contain only letters.";
+    if (!emailRegex.test(Email)) return "Invalid email format.";
+    if (!phoneRegex.test(Phone_No)) return "Phone number must be digits (9–15 characters).";
+    if (!phoneRegex.test(Emergency_Contact)) return "Emergency contact must be digits (9–15 characters).";
+  
+    const selectedDate = new Date(DOB);
+    const today = new Date();
+    if (!DOB || selectedDate > today) return "Date of birth must be valid and not in the future.";
+  
+    return null; // All valid
+  };
+  
 
   return (
     <>
