@@ -19,7 +19,7 @@ const FaceRecognition = ({ onCapture }) => {
         console.log("Loading faceRecognitionNet...");
         await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL);
 
-        console.log("✅ All models loaded");
+        console.log("All models loaded");
 
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         if (videoRef.current) {
@@ -27,7 +27,7 @@ const FaceRecognition = ({ onCapture }) => {
         }
         setStatus("Camera ready. Please click 'Capture Face'.");
       } catch (err) {
-        console.error("❌ Error loading models or accessing camera:", err);
+        console.error("Error loading models or accessing camera:", err);
         setStatus("Camera or model load error.");
       }
     };
@@ -46,9 +46,9 @@ const FaceRecognition = ({ onCapture }) => {
     if (detection?.descriptor) {
       const descriptorArray = Array.from(detection.descriptor);
       onCapture(descriptorArray);
-      setStatus("✅ Face captured successfully.");
+      setStatus("Face captured successfully.");
     } else {
-      setStatus("❌ No face detected. Try again.");
+      setStatus("No face detected. Try again.");
     }
   };
 

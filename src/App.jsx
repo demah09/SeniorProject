@@ -6,7 +6,7 @@ import Home from "./Pages/Home";
 import Register from "./Pages/Register";
 import LoginEmail from "./Pages/Login/LoginEmail";
 import LoginOtp from "./Pages/Login/LoginOtp";
-import LoginFace from "./Pages/Login/LoginFace"; // ✅ Correct file and import!
+import LoginFace from "./Pages/Login/LoginFace"; 
 import Dashboard from "./Pages/Dashboard";
 import CheckIn from "./Pages/CheckIn";
 import SuccessMessage from "./Components/SuccessMessage";
@@ -45,7 +45,7 @@ function InnerApp({ lang, setLang }) {
         <Route path="/register" element={<Register lang={lang} onLanguageChange={setLang} />} />
         <Route path="/login/email" element={<LoginEmail lang={lang} />} />
         <Route path="/login/otp" element={<LoginOtp lang={lang} />} />
-        <Route path="/login/face-recognition" element={<LoginFace lang={lang} />} /> {/* ✅ Corrected */}
+        <Route path="/login/face-recognition" element={<LoginFace lang={lang} />} /> 
         <Route path="/dashboard" element={<Dashboard lang={lang} onLanguageChange={setLang} />} />
         <Route path="/check-in" element={<CheckIn lang={lang} onLanguageChange={setLang} />} />
         <Route path="/modify-app" element={<ModifyApp lang={lang} onLanguageChange={setLang} />} />

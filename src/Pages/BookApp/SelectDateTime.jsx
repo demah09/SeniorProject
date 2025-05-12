@@ -87,7 +87,7 @@ const SelectDateTime = ({ lang, onLanguageChange }) => {
       />
       <HelpButton lang={lang}/>
 
-      {/* Responsive 2-column layout for calendar & slots */}
+      
       <div className="datetime-layout">
         {/* Calendar Box */}
         <div className="calendar-box">

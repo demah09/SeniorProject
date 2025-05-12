@@ -10,8 +10,8 @@
 
 /* Success message box */
 .success-box {
-    width: 70%; /* ✅ Increased width */
-    max-width: 700px; /* ✅ Made the box bigger */
+    width: 70%; 
+    max-width: 700px; 
     background: rgba(255, 255, 255, 0.3);
     padding: 50px;
     border-radius: 20px;
@@ -26,16 +26,16 @@
 
 /* Success text */
 .success-box h1 {
-    font-size: 28px; /* ✅ Bigger text */
+    font-size: 28px; 
     color: black;
     margin-bottom: 20px;
 }
 
 /* Success icon */
 .success-icon {
-    font-size: 90px; /* ✅ Bigger icon */
+    font-size: 90px; 
     color: #356abf;
-    margin-bottom: 20px; /* ✅ Add margin to space out the icon */
+    margin-bottom: 20px; 
 }
 
 /* Back to Dashboard Button */

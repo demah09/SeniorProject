@@ -11,7 +11,7 @@ const Dashboard = ({ lang, onLanguageChange }) => {
 
   return (
     <>
-      {/* Full-width ProfileCard outside of dashboard-container */}
+      
       <ProfileCard
         lang={lang}
         onLanguageChange={onLanguageChange}
@@ -20,7 +20,7 @@ const Dashboard = ({ lang, onLanguageChange }) => {
       <div className="dashboard-container">
       <HelpButton lang={lang} />
 
-        {/* Centered Action Buttons */}
+        
         <div className="actions-section">
           <button
             className="action-button"

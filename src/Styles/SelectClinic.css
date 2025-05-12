@@ -42,7 +42,7 @@
 /* Search input field */
 .clinic-search {
   width: 100%;
-  padding: 12px 40px 12px 16px; /* extra space for the icon */
+  padding: 12px 40px 12px 16px; 
   border-radius: 25px;
   border: none;
   font-size: 1rem;

@@ -19,15 +19,15 @@
 /* Centered Action Buttons Section */
 .actions-section {
     display: flex;
-    flex-direction: column; /* Stack buttons vertically */
+    flex-direction: column; 
     align-items: center;
-    gap: 25px; /* Space between buttons */
+    gap: 25px; 
     margin-top: 50px;
 }
 
-/* FIXED: Force Buttons to Stay Blue */
+
 .action-button {
-    background-color: #356abf !important; /* Ensure buttons are blue */
+    background-color: #356abf !important; 
     color: white !important;
     padding: 15px 25px;
     border-radius: 25px;
