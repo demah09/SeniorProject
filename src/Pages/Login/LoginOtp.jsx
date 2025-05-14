@@ -73,14 +73,7 @@ const LoginOtp = ({ lang }) => {
   <div className="login-box">
     <h2>{t.enterOtp}</h2>
     <form onSubmit={handleSubmit} className="otp-form">
-      <input
-        type={showOtp ? "text" : "password"}
-        placeholder="****"
-        value={otp}
-        onChange={handleChange}
-        className="otp-input"
-        maxLength={4}
-      />
+    
       <div className="otp-input-wrapper">
          <input
             type={showOtp ? "text" : "password"}
