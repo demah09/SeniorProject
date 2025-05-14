@@ -38,7 +38,20 @@ const ModifyApp = ({ lang, onLanguageChange }) => {
               </p>
 
               <h3>Appointment Date and Time</h3>
-              <p>{new Date(app.DOA).toLocaleString()}</p>
+              
+              <p>
+                {(() => {
+                    if (!app.DOA) return "No date provided";
+                      const date = new Date(app.DOA);
+                        return isNaN(date)
+                      ? "Invalid Date"
+                      : date.toLocaleString("en-US", { timeZone: "Asia/Riyadh" });
+                      })()}
+              </p>
+
+
+
+
 
               <h3>Doctor Name and Speciality</h3>
               <p>

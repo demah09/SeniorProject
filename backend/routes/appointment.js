@@ -40,7 +40,7 @@ router.get("/appointments/:fileNo", async (req, res) => {
     const [rows] = await db.query(`
       SELECT 
         A.Appt_ID,
-        A.DOA,
+        DATE_FORMAT(A.DOA, '%Y-%m-%dT%H:%i:%s') AS DOA,
         A.Status,
         D.Name,
         D.Specialization,
@@ -53,6 +53,7 @@ router.get("/appointments/:fileNo", async (req, res) => {
       WHERE A.Patient_ID = ?
       ORDER BY A.DOA DESC
     `, [fileNo]);
+    
 
     res.json(rows);
   } catch (error) {
@@ -69,7 +70,7 @@ router.get("/appointment/:id", async (req, res) => {
     const [rows] = await db.query(`
       SELECT 
         A.Appt_ID,
-        A.DOA,
+        DATE_FORMAT(A.DOA, '%Y-%m-%dT%H:%i:%s') AS DOA,
         A.Status,
         D.Name AS DoctorName,
         D.Specialization,

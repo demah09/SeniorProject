@@ -29,13 +29,20 @@ const SelectDateTime = ({ lang, onLanguageChange }) => {
     const fetchBookedSlots = async () => {
       if (!selectedDate || !Doc_ID) return;
 
-      const dateStr = selectedDate.toISOString().split("T")[0];
+      const dateStr = selectedDate.toLocaleDateString("en-CA");
+
 
       try {
         const res = await axios.get("https://seniorproject-uq3g.onrender.com/api/booked-timeslots", {
           params: { doctor: Doc_ID, date: dateStr }
         });
-        setBookedSlots(res.data);
+        const paddedSlots = res.data.map((t) => {
+          const [h, m, s] = t.split(":");
+          return `${h.padStart(2, "0")}:${m.padStart(2, "0")}:${s.padStart(2, "0")}`;
+        });
+        setBookedSlots(paddedSlots);
+        
+        
       } catch (error) {
         console.error("Error fetching booked slots:", error);
       }
@@ -55,8 +62,12 @@ const SelectDateTime = ({ lang, onLanguageChange }) => {
       return;
     }
 
-    const dateString = new Date(selectedDate).toISOString().split("T")[0];
+    const date = new Date(selectedDate);
+    const [year, month, day] = [date.getFullYear(), date.getMonth() + 1, date.getDate()];
+    const padded = (n) => n.toString().padStart(2, "0");
+    const dateString = `${year}-${padded(month)}-${padded(day)}`;
     const datetime = `${dateString} ${selectedTime}`;
+
 
     try {
       await axios.post("https://seniorproject-uq3g.onrender.com/api/appointments", {

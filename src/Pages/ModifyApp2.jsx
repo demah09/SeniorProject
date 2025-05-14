@@ -78,7 +78,7 @@ const ModifyApp2 = ({ lang, onLanguageChange }) => {
       <HelpButton lang={lang} />
 
       <div className="appointment-card">
-        <h3>Clinic Location</h3>
+        <h3>New Clinic Location</h3>
         <p>{clinicName} Department</p>
 
         <h3>Appointment Date and Time</h3>
